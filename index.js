@@ -1,7 +1,9 @@
 'use strict';
 
 const util = require("./util");
-
+const config = {
+    forceTitle: hexo.config.enhancer && hexo.config.enhancer.forceTitle
+}
 // prepare tags by `hexo.config.enhancer.tags` and `hexo.config.keywords`
 const tags = [];
 util.parseTags(hexo.config.tags, tags);
@@ -16,7 +18,7 @@ util.parseTags(hexo.config.keywords, tags);
 function filterPost(log, data) {
     let metadata = util.parseSource(data.source);
 
-    if (!data.title) {
+    if (!data.title || config.forceTitle) {
         data.title = metadata.title;
         log.i("Generate title [%s] for post [%s]", metadata.title, data.source);
     }
