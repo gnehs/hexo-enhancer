@@ -29,7 +29,7 @@ function filterPost(log, data) {
     }
 
     if (!data.abbrlink) {
-        data.abbrlink = util.crc32(data.title);
+        data.abbrlink = util.crc32(data.title).toLowerCase()
         log.i("Generate abbrlink [%s] for post [%s]", data.abbrlink, data.source);
     }
 
